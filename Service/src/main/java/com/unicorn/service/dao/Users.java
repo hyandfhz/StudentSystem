@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 @Repository
 public class Users {
@@ -23,9 +21,12 @@ public class Users {
         return new File("./data/user/" + type + "/" + userName);
     }
 
-    public String getUserInformation(File userDirectory, String field) throws IOException {
-
-
-        return fileReader.getFileString(new File(userDirectory, field));
+    public String getUserInformation(String type, String userName, String field) throws IOException {
+        if (userExists(type, userName)) {
+            return fileReader.getFileString(new File(getUserDirectory(type, userName), field));
+        }
+        else {
+            return null;
+        }
     }
 }
