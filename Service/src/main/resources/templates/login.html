@@ -83,18 +83,18 @@
             $.post(
               "/UserLoginCheck",
               {
-                userName: this.userName,
-                userPassWord: this.userPassWord,
+                userName: this.ruleForm.name,
+                userPassWord: this.ruleForm.password,
               },
               function (data, status) {
                 if (status == "success") {
                   if (data == "true") {
-                    ELEMENT.Message.success("成功!");
+                    ELEMENT.Message.success("成功 !");
                   } else {
-                    ELEMENT.Message.error("错误:" + data);
+                    ELEMENT.Message.error("错误: " + data);
                   }
                 } else {
-                  ELEMENT.Message.error("网络错误:" + status);
+                  ELEMENT.Message.error("网络错误: " + status);
                 }
               }
             );
