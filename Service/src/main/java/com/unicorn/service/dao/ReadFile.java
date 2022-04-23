@@ -29,7 +29,11 @@ public class ReadFile {
         return target;
     }
 
-    public void writeFile(File file, Object data){
+    public void writeFile(File file, String data) throws IOException {
+        new FileWriter(file).write(data);
+    }
 
+    public void appendFile(File file, String data) throws IOException {
+        new FileWriter(file, true).write(data);
     }
 }

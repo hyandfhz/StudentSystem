@@ -16,28 +16,30 @@ public class InitData {
     @Autowired
     public ReadFile readFile;
     @Autowired
-    Users users;
+    ControllerUser controllerUser;
 
     public void init(File settingsFile) throws ConfigurationException, IOException {
         PropertiesConfiguration settingsConfiguration = new PropertiesConfiguration();
         // 获取配置文件里的
         settingsConfiguration.load(settingsFile);
-        String rootName = settingsConfiguration.getString("rootUserName");
-        String rootPWD = settingsConfiguration.getString("rootUserPassword");
+        String rootUserName = settingsConfiguration.getString("rootUserName");
+        String rootUserPassword = settingsConfiguration.getString("rootUserPassword");
         settingsConfiguration.setProperty("ready", "ready");
         settingsConfiguration.clearProperty("rootUserName");
         settingsConfiguration.clearProperty("rootUserPassword");
         FileWriter settingsWriter = new FileWriter(settingsFile);
         settingsConfiguration.save(settingsWriter);
 
-        // 创建user DB
+        // 建一个数据库
+        readDirectory.removeDirectory("./data");
         readDirectory.getCreateDirectory("./data");
+
+        // 创建user DB
         readDirectory.getCreateDirectory("./data/user");
         readDirectory.getCreateDirectory("./data/user/student");
         readDirectory.getCreateDirectory("./data/user/teacher");
         readDirectory.getCreateDirectory("./data/user/controller");
-
         // 创建root用户
-
+        controllerUser.CreateController(rootUserName, rootUserPassword);
     }
 }
