@@ -30,7 +30,15 @@ public class ReadFile {
     }
 
     public void writeFile(File file, String data) throws IOException {
-        new FileWriter(file).write(data);
+        FileWriter writer = new FileWriter(file);
+        writer.write(data);
+        writer.flush();
+        writer.close();
+
+        writer = new FileWriter(file);
+        writer.write(data);
+        writer.flush();
+        writer.close();
     }
 
     public void appendFile(File file, String data) throws IOException {

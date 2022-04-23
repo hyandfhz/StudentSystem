@@ -33,7 +33,7 @@ public class Users {
     public void CreateUser(String type, Map<String, String> data) throws IOException {
         String userName = data.get("userName");
         File directory = getUserDirectory("controller", userName);
-        directoryReader.getCreateDirectory(directory.getCanonicalPath());
+        directoryReader.getCreateDirectory(directory.getAbsolutePath());
         data.remove("userName");
         for (Map.Entry<String, String> entry : data.entrySet()) {
             String key = entry.getKey();
