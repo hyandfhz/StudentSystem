@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>登录</title>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <!-- 引入vue -->
+    <script src="https://cn.vuejs.org/js/vue.min.js"></script>
+    <!-- 引入element-ui -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+    />
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="title">登录</h1>
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="用户账号" prop="name">
+          <el-input
+            v-model="ruleForm.name"
+            type="text"
+            placeholder="请输入用户名或者手机号"
+            @blur="check()"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="用户密码" prop="password">
+          <el-input
+            v-model="ruleForm.password"
+            type="password"
+            placeholder="输入密码"
+            @blur="check()"
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox label="记住我" name="type"></el-checkbox>
+        </el-form-item>
+        <el-button
+          type="primary"
+          plain
+          id="submitBox"
+          @click="onSubmit()"
+          ref="submitBox"
+          disabled
+          >提交
+        </el-button>
+      </el-form>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          ruleForm: {
+            name: "",
+            password: "",
+          },
+          rules: {
+            name: {
+              required: true,
+              message: "请输入用户名",
+              trigger: "blur",
+            },
+            password: {
+              required: true,
+              message: "请输入密码",
+              trigger: "blur",
+            },
+          },
+        },
+        methods: {
+          onSubmit() {
+            $.post(
+              "/UserLoginCheck",
+              {
+                userName: this.userName,
+                userPassWord: this.userPassWord,
+              },
+              function (data, status) {
+                if (status == "success") {
+                  if (data == "true") {
+                    ELEMENT.Message.success("成功!");
+                  } else {
+                    ELEMENT.Message.error("错误:" + data);
+                  }
+                } else {
+                  ELEMENT.Message.error("网络错误:" + status);
+                }
+              }
+            );
+          },
+          check() {
+            this.$refs["ruleForm"].validate((valid) => {
+              var button = document.getElementById("submitBox");
+              var buttonClass = button.getAttribute("class");
+              if (!valid) {
+                if (buttonClass.indexOf("is-disabled") == -1) {
+                  button.setAttribute("disabled", "disabled");
+                  button.setAttribute(
+                    "class",
+                    buttonClass.concat(" is-disabled")
+                  );
+                }
+              } else {
+                if (button["disabled"]) {
+                  button.removeAttribute("disabled");
+                }
+                button.setAttribute(
+                  "class",
+                  (buttonClass = buttonClass.replace(/ is-disabled/, ""))
+                );
+              }
+            });
+          },
+        },
+      });
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .title {
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 40px;
+        border-bottom: 1px #232323 solid;
+        text-align: center;
+      }
+
+      #app {
+        width: 600px;
+        padding: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 4px;
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+        border: 1px solid #efefef;
+      }
+
+      #submitBox {
+        margin-left: 100%;
+        transform: translate(-100%, 0);
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background: #5d4157;
+        background: -webkit-linear-gradient(to right, #c2e59c, #bfe9ff);
+        background: linear-gradient(to right, #c2e59c, #bfe9ff);
+        background-size: 400%;
+        animation: backdiv 12s infinite;
+      }
+
+      @keyframes backdiv {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+    </style>
+  </body>
+</html>
