@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="TestSystem" />
         <module name="Service" />
+        <module name="Web" />
       </profile>
     </annotationProcessing>
   </component>

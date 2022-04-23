@@ -1,3 +1,0 @@
-cd "D:\Program Files\jdk-18\bin"
-cmd
-java.exe -jar "F:\OneDrive - Leu\ДњТы\java\Web\TEST\Service-0.0.1-SNAPSHOT.jar"
