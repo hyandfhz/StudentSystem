@@ -32,6 +32,7 @@
             type="text"
             placeholder="请输入用户名或者手机号"
             @blur="check()"
+            autocomplete="on"
           ></el-input>
         </el-form-item>
         <el-form-item label="用户密码" prop="password">
@@ -40,6 +41,7 @@
             type="password"
             placeholder="输入密码"
             @blur="check()"
+            autocomplete="on"
           ></el-input>
         </el-form-item>
         <el-form-item>
@@ -87,11 +89,13 @@
                 userPassWord: this.ruleForm.password,
               },
               function (data, status) {
+                console.log(data);
+                var response = JSON.parse(data)['Message'];
                 if (status == "success") {
-                  if (data == "true") {
-                    ELEMENT.Message.success("成功 !");
+                  if (response.status) {
+                    ELEMENT.Message.success(response.message);
                   } else {
-                    ELEMENT.Message.error("错误: " + data);
+                    ELEMENT.Message.error(response.message);
                   }
                 } else {
                   ELEMENT.Message.error("网络错误: " + status);

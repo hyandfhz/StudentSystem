@@ -93,15 +93,24 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "TeacherId=" + TeacherId +
-                ", TeacherName='" + TeacherName + '\'' +
-                ", LoginId='" + LoginId + '\'' +
-                ", PassWord='" + PassWord + '\'' +
-                ", TeacherMobile='" + TeacherMobile + '\'' +
-                ", CreateTime='" + CreateTime + '\'' +
-                ", Status='" + Status + '\'' +
-                ", Role='" + Role + '\'' +
-                '}';
+        return "{\"Teacher\":{"
+                + "\"TeacherId\":"
+                + TeacherId
+                + ",\"TeacherName\":\""
+                + TeacherName + '\"'
+                + ",\"LoginId\":\""
+                + LoginId + '\"'
+                + ",\"PassWord\":\""
+                + PassWord + '\"'
+                + ",\"TeacherMobile\":\""
+                + TeacherMobile + '\"'
+                + ",\"CreateTime\":\""
+                + CreateTime + '\"'
+                + ",\"Status\":\""
+                + Status + '\"'
+                + ",\"Role\":\""
+                + Role + '\"'
+                + "}}";
+
     }
 }

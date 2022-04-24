@@ -25,9 +25,12 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
-                "message='" + message + '\'' +
-                ", status=" + status +
-                '}';
+        return "{\"Message\":{"
+                + "\"message\":\""
+                + message + '\"'
+                + ",\"status\":"
+                + status
+                + "}}";
+
     }
 }

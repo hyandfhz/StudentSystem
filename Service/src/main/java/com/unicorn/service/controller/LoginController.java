@@ -3,12 +3,14 @@ package com.unicorn.service.controller;
 import com.unicorn.service.mapper.TeacherMapper;
 import com.unicorn.service.pojo.Message;
 import com.unicorn.service.pojo.Teacher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
+    @Autowired
     TeacherMapper teacherMapper;
 
     @RequestMapping("/Login")
@@ -23,9 +25,9 @@ public class LoginController {
     public String userLoginCheckController(String userName, String userPassWord) {
         Teacher teacher;
         Message target = new Message();
-        teacher = teacherMapper.getTeacherByLoginId("userName");
+        teacher = teacherMapper.getTeacherByLoginId(userName);
         if (teacher == null) {
-            teacherMapper.getTeacherByLoginId("userName");
+            teacher = teacherMapper.getTeacherByTeacherMobile(userName);
             if (teacher == null) {
                 target.setStatus(false);
                 target.setMessage("用户不存在!请检查您的信息哦!");

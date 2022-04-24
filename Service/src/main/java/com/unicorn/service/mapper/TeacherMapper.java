@@ -2,6 +2,7 @@ package com.unicorn.service.mapper;
 
 import com.unicorn.service.pojo.Teacher;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface TeacherMapper {
