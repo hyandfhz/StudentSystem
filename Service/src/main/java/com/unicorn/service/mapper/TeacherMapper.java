@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TeacherMapper {
     // 新建一个Teacher
-    Teacher getTeacher(int TeacherId);
+    Teacher getTeacherByTeacherId(int TeacherId);
 
     Teacher getTeacherByLoginId(String LoginId);
 
