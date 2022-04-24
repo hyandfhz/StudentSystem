@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unicorn.service.mapper.TeacherMapper">
+    <select id="getTeacher" parameterType="int" resultType="com.unicorn.service.pojo.Teacher">
+        SELECT * FROM Teacher where TeacherId = #{TeacherId}
+    </select>
+
+    <select id="getTeacherByLoginId" resultType="com.unicorn.service.pojo.Teacher">
+        SELECT * FROM Teacher where LoginId = '#{LoginId}'
+    </select>
+
+    <select id="getTeacherByTeacherMobile" resultType="com.unicorn.service.pojo.Teacher">
+        SELECT * FROM Teacher where TeacherMobile = '#{TeacherMobile}'
+    </select>
+</mapper>
