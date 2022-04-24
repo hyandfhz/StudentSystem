@@ -18,8 +18,6 @@ public class LoginController {
     @ResponseBody
     @RequestMapping(value = "/UserLoginCheck", method = RequestMethod.POST)
     public String userLoginCheckController(String userName, String userPassWord) {
-        System.out.println(userName);
-        System.out.println(userPassWord);
         if (!Objects.equals(userName, "unicorn")) {
             return "UserName is Wrong";
         } else if (!Objects.equals(userPassWord, "123456")) {
