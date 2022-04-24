@@ -24,6 +24,7 @@ public class LoginController {
     @RequestMapping(value = "/UserLoginCheck", method = RequestMethod.POST)
     public String userLoginCheckController(String userName, String userPassWord) {
         Teacher teacher;
+        // 返回消息
         Message target = new Message();
         teacher = teacherMapper.getTeacherByLoginId(userName);
         if (teacher == null) {
